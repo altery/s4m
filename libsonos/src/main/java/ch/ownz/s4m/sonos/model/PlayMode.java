@@ -15,37 +15,21 @@
  */
 package ch.ownz.s4m.sonos.model;
 
-/**
- * UPNP specified modes of play. TODO check this against Sonos modes
- * possibilities.
- * 
- * @author David WHEELER
- * @author Serge SIMON
- * 
- */
 public enum PlayMode {
   
-  /** The normal. */
   NORMAL, 
   
-  /** The shuffle. */
   SHUFFLE,
   
-  /** The shuffle norepeat. */
   SHUFFLE_NOREPEAT,
   
-  /** The repeat one. */
   REPEAT_ONE, 
   
-  /** The repeat all. */
   REPEAT_ALL, 
   
-  /** The random. */
   RANDOM, 
   
-  /** The DIREC t_1. */
   DIRECT_1, 
   
-  /** The intro. */
   INTRO;
 }
