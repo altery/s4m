@@ -1,0 +1,23 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+repositories {
+    mavenCentral()
+    
+    maven {
+        url "http://teleal.org/m2"
+    }
+    
+    flatDir name: 'libs', dirs: "$projectDir/libs"
+}
+
+dependencies {
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.1'
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.2'
+    compile group: 'org.slf4j', name: 'slf4j-jdk14', version: '1.7.2'
+    compile group: 'org.teleal.cling', name: 'cling-core', version: '1.0.5'
+    compile fileTree('libs')
+    
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+}
+
