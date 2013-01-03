@@ -1,12 +1,4 @@
 *.class
 
-# Package Files #
-*.jar
-*.war
-*.ear
-
 .gradle/
 
-.classpath
-.project
-org.eclipse.jdt.core.prefs
