@@ -5,6 +5,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.teleal.cling.UpnpServiceImpl;
 
+import ch.ownz.s4m.sonos.discovery.ZonePlayerDiscoverer;
+
 public class Engine {
 
 	private static final Logger LOG = LoggerFactory.getLogger(Engine.class);

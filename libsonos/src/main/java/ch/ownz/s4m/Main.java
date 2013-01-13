@@ -11,10 +11,10 @@ import ch.ownz.s4m.sonos.model.PlayMode;
 import ch.ownz.s4m.sonos.service.AVTransportService;
 
 /**
- * Test entry point.
+ * Test entry point that serves as a quick and dirty way to get things started.
  * 
  * @author altery
- *
+ * 
  */
 public class Main {
 

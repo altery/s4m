@@ -1,18 +1,19 @@
 package ch.ownz.s4m.sonos.device;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import ch.ownz.s4m.sonos.service.AVTransportService;
+import ch.ownz.s4m.sonos.service.ConnectionManagerService;
 import ch.ownz.s4m.sonos.service.RenderingControlService;
 import ch.ownz.s4m.sonos.service.SonosService;
 import ch.ownz.s4m.sonos.service.SonosServiceFactory;
 
-public class MediaRendererDevice extends SonosDevice {
+public class MediaRendererDevice extends EmbeddedDevice {
 
 	private RenderingControlService renderingControlService;
 	private AVTransportService avTransportService;
+	private ConnectionManagerService connectionManagerService;
 
 	public AVTransportService getAvTransportService() {
 		return this.avTransportService;
@@ -29,15 +30,14 @@ public class MediaRendererDevice extends SonosDevice {
 
 		this.renderingControlService = serviceFactory.createService(RenderingControlService.class, this);
 		services.add(this.renderingControlService);
+
 		this.avTransportService = serviceFactory.createService(AVTransportService.class, this);
 		services.add(this.avTransportService);
 
-		return services;
-	}
+		this.connectionManagerService = serviceFactory.createService(ConnectionManagerService.class, this);
+		services.add(this.connectionManagerService);
 
-	@Override
-	protected List<SonosDevice> findChildDevices() {
-		return Collections.emptyList();
+		return services;
 	}
 
 	@Override

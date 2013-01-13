@@ -18,6 +18,8 @@ public class SonosServiceFactory {
 			if (remoteService != null) {
 				sonosService.init(remoteService, sonosDevice);
 				return sonosService;
+			} else {
+				LOG.warn("Couln't find service " + serviceClass.getSimpleName() + " for sonos device " + sonosDevice);
 			}
 		} catch (InstantiationException e) {
 			LOG.error("Failed to create service", e);

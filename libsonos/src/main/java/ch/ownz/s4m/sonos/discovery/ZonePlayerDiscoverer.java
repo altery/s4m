@@ -1,4 +1,4 @@
-package ch.ownz.s4m;
+package ch.ownz.s4m.sonos.discovery;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +17,7 @@ import org.teleal.cling.registry.Registry;
 import org.teleal.cling.registry.RegistryListener;
 
 import ch.ownz.s4m.sonos.device.DeviceFactory;
+import ch.ownz.s4m.sonos.device.SonosHardwareDevice;
 import ch.ownz.s4m.sonos.device.ZonePlayerDevice;
 
 public class ZonePlayerDiscoverer {
@@ -74,9 +75,16 @@ public class ZonePlayerDiscoverer {
 							replacedPlayer.dispose();
 						}
 						if (LOG.isDebugEnabled()) {
-							LOG.debug("Found zone new player: " + zonePlayer + ", we now have "
+							LOG.debug("Found zone new ZonePlayer: " + zonePlayer + ", we now have "
 									+ ZonePlayerDiscoverer.this.zonePlayers.size() + " devices");
 						}
+					} else {
+						SonosHardwareDevice sonosHardwareDevice = ZonePlayerDiscoverer.this.deviceFactory
+								.createSonosHardwareDevice(device);
+						if (LOG.isDebugEnabled()) {
+							LOG.debug("Found new non-ZonePlayer device: " + sonosHardwareDevice);
+						}
+						// We could create BRIDGE representations here...
 					}
 				}
 			}

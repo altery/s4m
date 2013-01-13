@@ -43,7 +43,7 @@ public abstract class SonosService {
 			@Override
 			protected void failed(GENASubscription subscription, UpnpResponse responseStatus, Exception exception,
 					String defaultMsg) {
-				LOG.error("Service event subscription failed", exception);
+				LOG.error("Service event subscription failed for service " + subscription.getService(), exception);
 			}
 
 			@Override
@@ -54,7 +54,7 @@ public abstract class SonosService {
 			@Override
 			protected void eventReceived(GENASubscription subscription) {
 				if (LOG.isDebugEnabled()) {
-					LOG.debug("Service event received");
+					LOG.debug("Service event received:" + subscription);
 				}
 				handleServiceEvent(subscription);
 			}

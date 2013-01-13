@@ -12,6 +12,8 @@ public class DeviceFactory {
 
 	private static final String MEDIA_RENDERER_DEVICE_ID = "MediaRenderer";
 
+	private static final String MEDIA_SERVER_DEVICE_ID = "MediaServer";
+
 	private final ControlPoint controlPoint;
 
 	public DeviceFactory(ControlPoint controlPoint) {
@@ -23,7 +25,7 @@ public class DeviceFactory {
 				.lookupService(device);
 		if (musicServicesService != null) {
 			// Only sonos devices that provide the music services service are
-			// zone players
+			// zone players (TODO: confirm this assumption)
 			ZonePlayerDevice zonePlayerDevice = new ZonePlayerDevice();
 			zonePlayerDevice.init(device, this.controlPoint);
 			return zonePlayerDevice;
@@ -31,20 +33,38 @@ public class DeviceFactory {
 		return null;
 	}
 
+	public SonosHardwareDevice createSonosHardwareDevice(RemoteDevice device) {
+		SonosHardwareDevice sonosHardwareDevice = new SonosHardwareDevice();
+		sonosHardwareDevice.init(device, this.controlPoint);
+		return sonosHardwareDevice;
+
+	}
+
 	public MediaRendererDevice createMediaRendererDevice(ZonePlayerDevice player) {
 		RemoteDevice parentDevice = player.getUpnpDevice();
-		RemoteDevice childDevice = findChildDevice(parentDevice, MEDIA_RENDERER_DEVICE_ID);
-		if (childDevice != null) {
+		RemoteDevice embeddedDevice = findEmbeddedDevices(parentDevice, MEDIA_RENDERER_DEVICE_ID);
+		if (embeddedDevice != null) {
 			MediaRendererDevice mediaRendererDevice = new MediaRendererDevice();
-			mediaRendererDevice.init(childDevice, this.controlPoint);
+			mediaRendererDevice.init(embeddedDevice, this.controlPoint);
 			return mediaRendererDevice;
 		}
 		return null;
 	}
 
-	protected RemoteDevice findChildDevice(RemoteDevice parentDevice, String childDeviceType) {
+	public MediaServerDevice createMediaServerDevice(ZonePlayerDevice player) {
+		RemoteDevice parentDevice = player.getUpnpDevice();
+		RemoteDevice embeddedDevice = findEmbeddedDevices(parentDevice, MEDIA_SERVER_DEVICE_ID);
+		if (embeddedDevice != null) {
+			MediaServerDevice mediaServerDevice = new MediaServerDevice();
+			mediaServerDevice.init(embeddedDevice, this.controlPoint);
+			return mediaServerDevice;
+		}
+		return null;
+	}
+
+	protected RemoteDevice findEmbeddedDevices(RemoteDevice parentDevice, String embeddedDeviceType) {
 		RemoteDevice[] embeddedDevices = parentDevice.getEmbeddedDevices();
-		UDADeviceType udaDeviceType = new UDADeviceType(childDeviceType);
+		UDADeviceType udaDeviceType = new UDADeviceType(embeddedDeviceType);
 		for (RemoteDevice embeddedDevice : embeddedDevices) {
 			DeviceType type = embeddedDevice.getType();
 			if (type.equals(udaDeviceType)) {

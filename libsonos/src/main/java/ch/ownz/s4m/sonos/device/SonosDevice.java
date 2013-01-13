@@ -14,6 +14,11 @@ import ch.ownz.s4m.sonos.actionexecution.Response;
 import ch.ownz.s4m.sonos.actionexecution.SequentialServiceActionExecutor;
 import ch.ownz.s4m.sonos.service.SonosService;
 
+/**
+ * Represents a UPNP Sonos device.
+ * 
+ * @author altery
+ */
 public abstract class SonosDevice {
 
 	private static final Logger LOG = LoggerFactory.getLogger(SonosDevice.class);
@@ -28,7 +33,7 @@ public abstract class SonosDevice {
 
 	private final List<SonosService> services = new ArrayList<SonosService>();
 
-	private final List<SonosDevice> childDevices = new ArrayList<SonosDevice>();
+	private final List<EmbeddedDevice> embeddedDevices = new ArrayList<EmbeddedDevice>();
 
 	public void init(RemoteDevice device, ControlPoint controlPoint) {
 		if (this.initialized) {
@@ -38,7 +43,7 @@ public abstract class SonosDevice {
 		this.controlPoint = controlPoint;
 		this.serviceActionExecutor = new SequentialServiceActionExecutor(controlPoint);
 		this.services.addAll(findServices());
-		this.childDevices.addAll(findChildDevices());
+		this.embeddedDevices.addAll(findEmbeddedDevices());
 	}
 
 	public ControlPoint getControlPoint() {
@@ -57,8 +62,8 @@ public abstract class SonosDevice {
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Disposing SonosDevice: " + this.device.getDisplayString());
 		}
-		for (SonosDevice childDevice : this.childDevices) {
-			childDevice.dispose();
+		for (EmbeddedDevice embeddedDevice : this.embeddedDevices) {
+			embeddedDevice.dispose();
 		}
 		this.serviceActionExecutor.stop();
 	}
@@ -67,6 +72,6 @@ public abstract class SonosDevice {
 
 	protected abstract List<SonosService> findServices();
 
-	protected abstract List<SonosDevice> findChildDevices();
+	protected abstract List<EmbeddedDevice> findEmbeddedDevices();
 
 }
