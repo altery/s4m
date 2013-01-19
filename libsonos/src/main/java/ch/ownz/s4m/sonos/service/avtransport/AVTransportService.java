@@ -17,28 +17,28 @@ public class AVTransportService extends SonosService {
 	 *            the entry
 	 */
 	public void setAvTransportUri(Entry entry) {
-		new SetTransportUri(this, entry).execute();
+		new SetTransportUri(this, entry).execute().waitForResponse();
 	}
 
 	/**
 	 * Starts the playback of the current transport uri.
 	 */
 	public void play() {
-		new PlayAction(this).execute();
+		new PlayAction(this).execute().waitForResponse();
 	}
 
 	/**
 	 * Stops the playback
 	 */
 	public void stop() {
-		new StopAction(this).execute();
+		new StopAction(this).execute().waitForResponse();
 	}
 
 	/**
 	 * Pauses the playback
 	 */
 	public void pause() {
-		new PauseAction(this).execute();
+		new PauseAction(this).execute().waitForResponse();
 	}
 
 	/**
@@ -47,7 +47,7 @@ public class AVTransportService extends SonosService {
 	 * @param mode
 	 */
 	public void setPlayMode(PlayMode mode) {
-		new SetPlayModeAction(this, mode).execute();
+		new SetPlayModeAction(this, mode).execute().waitForResponse();
 	}
 
 	@Override

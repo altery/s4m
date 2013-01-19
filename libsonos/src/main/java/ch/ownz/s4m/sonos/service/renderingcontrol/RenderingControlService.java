@@ -21,7 +21,7 @@ public class RenderingControlService extends SonosService {
 	}
 
 	public void setMute(boolean mute) {
-		new SetMuteAction(this, mute).execute();
+		new SetMuteAction(this, mute).execute().waitForResponse();
 	}
 
 	public int getVolume() {
@@ -29,7 +29,7 @@ public class RenderingControlService extends SonosService {
 	}
 
 	public void setVolume(int volume) {
-		new SetVolumeAction(this, volume).execute();
+		new SetVolumeAction(this, volume).execute().waitForResponse();
 	}
 
 	@Override
