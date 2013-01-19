@@ -23,8 +23,9 @@ import ch.ownz.s4m.sonos.service.SonosService;
  * @author altery
  * 
  * @param <T>
- *            the type of the response, may be {@link ServiceActionResponse.Void} for
- *            actions that do not result in a response.
+ *            the type of the response, may be
+ *            {@link ServiceActionResponse.Void} for actions that do not result
+ *            in a response.
  */
 public abstract class ServiceAction<T extends ServiceActionResponse> {
 
@@ -36,7 +37,7 @@ public abstract class ServiceAction<T extends ServiceActionResponse> {
 	private ExecutorService executorService;
 
 	/**
-	 * Cretes a new action.
+	 * Creates a new action.
 	 * 
 	 * @param service
 	 *            the service this action is supposed to be executed on
@@ -72,8 +73,8 @@ public abstract class ServiceAction<T extends ServiceActionResponse> {
 	 * Delegates the creation of an action response object to the client of this
 	 * class.
 	 * 
-	 * @return a new instance of a subclass of {@link ServiceActionResponse}. Client
-	 *         are not required to perform any additional initialization.
+	 * @return a new instance of a subclass of {@link ServiceActionResponse}.
+	 *         Client are not required to perform any additional initialization.
 	 */
 	protected abstract T createActionResponse();
 
@@ -176,9 +177,9 @@ public abstract class ServiceAction<T extends ServiceActionResponse> {
 
 		@Override
 		public void failure(ActionInvocation invocation, UpnpResponse operation, String defaultMsg) {
+			this.actionResponse = createActionResponse();
+			this.actionResponse.failed(operation, defaultMsg);
 			synchronized (this) {
-				this.actionResponse = createActionResponse();
-				this.actionResponse.failed(operation, defaultMsg);
 				this.responseReceived = true;
 				notifyAll();
 			}
