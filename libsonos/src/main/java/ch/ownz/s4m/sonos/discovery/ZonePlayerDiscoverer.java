@@ -19,6 +19,8 @@ import org.teleal.cling.registry.RegistryListener;
 import ch.ownz.s4m.sonos.device.DeviceFactory;
 import ch.ownz.s4m.sonos.device.SonosHardwareDevice;
 import ch.ownz.s4m.sonos.device.ZonePlayerDevice;
+import ch.ownz.s4m.sonos.model.ZoneAttributes;
+import ch.ownz.s4m.sonos.service.deviceproperties.DevicePropertiesService;
 
 public class ZonePlayerDiscoverer {
 
@@ -106,9 +108,13 @@ public class ZonePlayerDiscoverer {
 	public ZonePlayerDevice getZonePlayerByName(String zoneName) {
 		for (Entry<String, ZonePlayerDevice> entry : this.zonePlayers.entrySet()) {
 			ZonePlayerDevice zonePlayer = entry.getValue();
-			String zonePlayerZoneName = zonePlayer.getDevicePropertiesService().getZoneAttributes().getName();
-			if (zoneName.equalsIgnoreCase(zonePlayerZoneName)) {
-				return zonePlayer;
+			DevicePropertiesService devicePropertiesService = zonePlayer.getDevicePropertiesService();
+			ZoneAttributes zoneAttributes = devicePropertiesService.getZoneAttributes();
+			if (zoneAttributes != null) {
+				String zonePlayerZoneName = zoneAttributes.getName();
+				if (zoneName.equalsIgnoreCase(zonePlayerZoneName)) {
+					return zonePlayer;
+				}
 			}
 		}
 		return null;
