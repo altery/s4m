@@ -16,7 +16,7 @@ dependencies {
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.2'
     compile group: 'org.slf4j', name: 'slf4j-jdk14', version: '1.7.2'
     compile group: 'org.teleal.cling', name: 'cling-core', version: '1.0.5'
-    compile fileTree('libs')
+    compile fileTree('libs').include('**/*.jar')
     
     testCompile group: 'junit', name: 'junit', version: '4.+'
 }
