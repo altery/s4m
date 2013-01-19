@@ -3,12 +3,12 @@ package ch.ownz.s4m.sonos.device;
 import java.util.ArrayList;
 import java.util.List;
 
-import ch.ownz.s4m.sonos.service.AlarmClockService;
-import ch.ownz.s4m.sonos.service.AudioInService;
-import ch.ownz.s4m.sonos.service.MusicServicesService;
-import ch.ownz.s4m.sonos.service.RenderingControlService;
 import ch.ownz.s4m.sonos.service.SonosService;
 import ch.ownz.s4m.sonos.service.SonosServiceFactory;
+import ch.ownz.s4m.sonos.service.alarmclock.AlarmClockService;
+import ch.ownz.s4m.sonos.service.audioin.AudioInService;
+import ch.ownz.s4m.sonos.service.musicservices.MusicServicesService;
+import ch.ownz.s4m.sonos.service.renderingcontrol.RenderingControlService;
 
 /**
  * Represents a Sonos ZonePlayer.

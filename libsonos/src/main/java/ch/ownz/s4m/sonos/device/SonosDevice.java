@@ -2,16 +2,12 @@ package ch.ownz.s4m.sonos.device;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Future;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.teleal.cling.controlpoint.ControlPoint;
 import org.teleal.cling.model.meta.RemoteDevice;
 
-import ch.ownz.s4m.sonos.actionexecution.Message;
-import ch.ownz.s4m.sonos.actionexecution.Response;
-import ch.ownz.s4m.sonos.actionexecution.SequentialServiceActionExecutor;
 import ch.ownz.s4m.sonos.service.SonosService;
 
 /**
@@ -29,8 +25,6 @@ public abstract class SonosDevice {
 
 	private ControlPoint controlPoint;
 
-	private SequentialServiceActionExecutor serviceActionExecutor;
-
 	private final List<SonosService> services = new ArrayList<SonosService>();
 
 	private final List<EmbeddedDevice> embeddedDevices = new ArrayList<EmbeddedDevice>();
@@ -41,7 +35,6 @@ public abstract class SonosDevice {
 		}
 		this.device = device;
 		this.controlPoint = controlPoint;
-		this.serviceActionExecutor = new SequentialServiceActionExecutor(controlPoint);
 		this.services.addAll(findServices());
 		this.embeddedDevices.addAll(findEmbeddedDevices());
 	}
@@ -54,10 +47,6 @@ public abstract class SonosDevice {
 		return this.device;
 	}
 
-	public Future<Response> execute(Message message) {
-		return this.serviceActionExecutor.execute(message);
-	}
-
 	public void dispose() {
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Disposing SonosDevice: " + this.device.getDisplayString());
@@ -65,7 +54,6 @@ public abstract class SonosDevice {
 		for (EmbeddedDevice embeddedDevice : this.embeddedDevices) {
 			embeddedDevice.dispose();
 		}
-		this.serviceActionExecutor.stop();
 	}
 
 	public abstract void deviceUpdated();

@@ -1,4 +1,4 @@
-package ch.ownz.s4m.sonos.service;
+package ch.ownz.s4m.sonos.service.groupmanagement;
 
 import java.util.Map;
 
@@ -6,19 +6,18 @@ import org.teleal.cling.model.gena.GENASubscription;
 import org.teleal.cling.model.meta.RemoteService;
 import org.teleal.cling.model.state.StateVariableValue;
 
-import ch.ownz.s4m.sonos.actionexecution.Message;
 import ch.ownz.s4m.sonos.device.ZonePlayerDevice;
+import ch.ownz.s4m.sonos.service.SonosRemoteServiceReference;
+import ch.ownz.s4m.sonos.service.SonosService;
 
 public class GroupManagementService extends SonosService {
 
 	public void addMember(ZonePlayerDevice zonePlayer) {
-		Message message = createMessage("AddMember");
-		message.set("MemberID", "");
+
 	}
 
 	public void removeMember(ZonePlayerDevice zonePlayer) {
-		Message message = createMessage("RemoveMember");
-		message.set("MemberID", "");
+
 	}
 
 	@Override

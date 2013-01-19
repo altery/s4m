@@ -8,7 +8,7 @@ import org.jnativehook.keyboard.NativeKeyListener;
 import ch.ownz.s4m.sonos.device.ZonePlayerDevice;
 import ch.ownz.s4m.sonos.model.Entry;
 import ch.ownz.s4m.sonos.model.PlayMode;
-import ch.ownz.s4m.sonos.service.AVTransportService;
+import ch.ownz.s4m.sonos.service.avtransport.AVTransportService;
 
 /**
  * Test entry point that serves as a quick and dirty way to get things started.

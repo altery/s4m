@@ -7,7 +7,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import ch.ownz.s4m.sonos.service.RenderingControlService;
+import ch.ownz.s4m.sonos.service.renderingcontrol.RenderingControlService;
 
 /**
  * Parses events of the {@link RenderingControlService}.

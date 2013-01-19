@@ -3,11 +3,11 @@ package ch.ownz.s4m.sonos.device;
 import java.util.ArrayList;
 import java.util.List;
 
-import ch.ownz.s4m.sonos.service.AVTransportService;
-import ch.ownz.s4m.sonos.service.ConnectionManagerService;
-import ch.ownz.s4m.sonos.service.RenderingControlService;
 import ch.ownz.s4m.sonos.service.SonosService;
 import ch.ownz.s4m.sonos.service.SonosServiceFactory;
+import ch.ownz.s4m.sonos.service.avtransport.AVTransportService;
+import ch.ownz.s4m.sonos.service.connectionmanager.ConnectionManagerService;
+import ch.ownz.s4m.sonos.service.renderingcontrol.RenderingControlService;
 
 public class MediaRendererDevice extends EmbeddedDevice {
 

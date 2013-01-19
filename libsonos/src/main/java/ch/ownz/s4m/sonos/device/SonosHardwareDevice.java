@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import ch.ownz.s4m.sonos.service.DevicePropertiesService;
-import ch.ownz.s4m.sonos.service.GroupManagementService;
 import ch.ownz.s4m.sonos.service.SonosService;
 import ch.ownz.s4m.sonos.service.SonosServiceFactory;
-import ch.ownz.s4m.sonos.service.SystemPropertiesService;
-import ch.ownz.s4m.sonos.service.ZoneGroupTopologyService;
+import ch.ownz.s4m.sonos.service.deviceproperties.DevicePropertiesService;
+import ch.ownz.s4m.sonos.service.groupmanagement.GroupManagementService;
+import ch.ownz.s4m.sonos.service.systemproperties.SystemPropertiesService;
+import ch.ownz.s4m.sonos.service.zonegrouptopology.ZoneGroupTopologyService;
 
 /**
  * Represents an actual Sonos device, that provides common functionality.

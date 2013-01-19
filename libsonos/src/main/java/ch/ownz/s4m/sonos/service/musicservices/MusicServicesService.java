@@ -1,9 +1,12 @@
-package ch.ownz.s4m.sonos.service;
+package ch.ownz.s4m.sonos.service.musicservices;
 
 import org.teleal.cling.model.gena.GENASubscription;
 import org.teleal.cling.model.meta.RemoteService;
 
-public class AlarmClockService extends SonosService {
+import ch.ownz.s4m.sonos.service.SonosRemoteServiceReference;
+import ch.ownz.s4m.sonos.service.SonosService;
+
+public class MusicServicesService extends SonosService {
 
 	@Override
 	protected void handleServiceEvent(GENASubscription<RemoteService> subscription) {
@@ -11,7 +14,7 @@ public class AlarmClockService extends SonosService {
 
 	@Override
 	protected SonosRemoteServiceReference getRemoteServiceReference() {
-		return SonosRemoteServiceReference.getAlarmClockServiceReference();
+		return SonosRemoteServiceReference.getMusicServicesServiceReference();
 	}
 
 }

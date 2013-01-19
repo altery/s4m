@@ -1,17 +1,14 @@
 package ch.ownz.s4m.sonos.service;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.teleal.cling.controlpoint.SubscriptionCallback;
+import org.teleal.cling.model.action.ActionInvocation;
 import org.teleal.cling.model.gena.CancelReason;
 import org.teleal.cling.model.gena.GENASubscription;
 import org.teleal.cling.model.message.UpnpResponse;
 import org.teleal.cling.model.meta.RemoteService;
 
-import ch.ownz.s4m.sonos.actionexecution.Message;
 import ch.ownz.s4m.sonos.device.SonosDevice;
 
 public abstract class SonosService {
@@ -21,8 +18,6 @@ public abstract class SonosService {
 	private RemoteService remoteService;
 
 	private boolean initialized;
-
-	private final Map<ServiceProperty, Object> state = new ConcurrentHashMap<ServiceProperty, Object>();
 
 	private SonosDevice owningDevice;
 
@@ -34,6 +29,10 @@ public abstract class SonosService {
 		this.owningDevice = owningDevice;
 		registerServiceEventListener();
 		this.initialized = true;
+	}
+
+	protected void logActionInvocationError(ActionInvocation<?> invocation, UpnpResponse operation, String defaultMsg) {
+		LOG.error("Failed to invoke action " + invocation.toString() + ": " + defaultMsg);
 	}
 
 	private void registerServiceEventListener() {
@@ -81,34 +80,12 @@ public abstract class SonosService {
 
 	}
 
-	protected Message createMessage(String name) {
-		return new Message(getRemoteService(), name);
-	}
-
-	protected void saveState(ServiceProperty property, Object value) {
-		this.state.put(property, value);
-		LOG.info("Property changed: " + property + "/" + value);
-	}
-
-	@SuppressWarnings("unchecked")
-	protected <T> T getState(ServiceProperty property, Class<T> type) {
-		Object object = this.state.get(property);
-		if (object != null && type.isAssignableFrom(object.getClass())) {
-			return (T) object;
-		}
-		return null;
-	}
-
 	public RemoteService getRemoteService() {
 		return this.remoteService;
 	}
 
 	public SonosDevice getOwningDevice() {
 		return this.owningDevice;
-	}
-
-	public void clearState() {
-		this.state.clear();
 	}
 
 	protected abstract void handleServiceEvent(GENASubscription<RemoteService> subscription);
