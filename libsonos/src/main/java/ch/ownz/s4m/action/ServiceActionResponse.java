@@ -24,6 +24,11 @@ public abstract class ServiceActionResponse {
 	private String errorMessage;
 	private boolean failed;
 
+	/**
+	 * Determines if the service invocation has failed.
+	 * 
+	 * @return true if the action invocation failed, false otherwise
+	 */
 	public boolean isFailed() {
 		return this.failed;
 	}
