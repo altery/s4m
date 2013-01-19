@@ -30,8 +30,6 @@ public class SonosHardwareDevice extends SonosDevice {
 
 	private DevicePropertiesService devicePropertiesService;
 
-	private MediaRendererDevice mediaRendererDevice;
-
 	private GroupManagementService groupManagementService;
 
 	private ZoneGroupTopologyService zoneGroupTopologyService;
@@ -40,10 +38,6 @@ public class SonosHardwareDevice extends SonosDevice {
 
 	public DevicePropertiesService getDevicePropertiesService() {
 		return this.devicePropertiesService;
-	}
-
-	public MediaRendererDevice getMediaRendererDevice() {
-		return this.mediaRendererDevice;
 	}
 
 	@Override

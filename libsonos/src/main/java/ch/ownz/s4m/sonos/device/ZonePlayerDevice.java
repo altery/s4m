@@ -34,7 +34,6 @@ public class ZonePlayerDevice extends SonosHardwareDevice {
 
 	private RenderingControlService renderingControlService;
 
-	@Override
 	public MediaRendererDevice getMediaRendererDevice() {
 		return this.mediaRendererDevice;
 	}
